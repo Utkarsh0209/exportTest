@@ -1,0 +1,5 @@
+# Ignore everything in target
+target/*
+
+# But DO NOT ignore the final JAR
+!target/sf-drive-transfer-1.0-SNAPSHOT.jar
