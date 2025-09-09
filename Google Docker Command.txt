@@ -1,10 +1,8 @@
 mvn clean package 
 
-
 docker build -t gcr.io/tonal-land-469412-u2/sf-to-sp-upload:latest .
 
 docker push gcr.io/tonal-land-469412-u2/sf-to-sp-upload:latest
 
-
-
 gcloud run deploy sf-to-sp-upload --image gcr.io/tonal-land-469412-u2/sf-to-sp-upload:latest --platform managed --region asia-south1 --allow-unauthenticated --memory 512Mi
+
