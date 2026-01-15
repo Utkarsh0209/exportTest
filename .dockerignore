@@ -2,4 +2,4 @@
 target/*
 
 # But DO NOT ignore the final JAR
-!target/sf-drive-transfer-1.0-SNAPSHOT.jar
+!target/xfilespro-export-1.0.0.jar
