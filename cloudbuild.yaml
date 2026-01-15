@@ -1,0 +1,29 @@
+steps:
+# STEP 1: Build Docker image
+- name: gcr.io/cloud-builders/docker
+  args:
+    - build
+    - -t
+    - asia-south1-docker.pkg.dev/tonal-land-469412-u2/cloud-run-source-deploy/exporttest/exporttest:$COMMIT_SHA
+    - .
+
+# STEP 2: Push Docker image to Artifact Registry
+- name: gcr.io/cloud-builders/docker
+  args:
+    - push
+    - asia-south1-docker.pkg.dev/tonal-land-469412-u2/cloud-run-source-deploy/exporttest/exporttest:$COMMIT_SHA
+
+# STEP 3: Deploy to Cloud Run
+- name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+  entrypoint: gcloud
+  args:
+    - run
+    - deploy
+    - exporttest
+    - --image=asia-south1-docker.pkg.dev/tonal-land-469412-u2/cloud-run-source-deploy/exporttest/exporttest:$COMMIT_SHA
+    - --region=asia-south1
+    - --platform=managed
+    - --allow-unauthenticated
+
+images:
+- asia-south1-docker.pkg.dev/tonal-land-469412-u2/cloud-run-source-deploy/exporttest/exporttest:$COMMIT_SHA
